@@ -2,10 +2,16 @@ from sqlalchemy.orm import declarative_base
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-engine = create_engine("postgresql://admin:admin@localhost/db_item",
-    echo=True
+from src.settings import settings
+
+settings = settings()
+
+engine = create_engine(
+    settings.SQLALCHEMY_DATABASE_URI,
+    pool_pre_ping= True,
+    echo= True
 )
 
-Base = declarative_base()
+SessionLocal= sessionmaker(autocommit=False, autoflush=False,bind=engine)
 
-SessionLocal= sessionmaker(bind=engine)
+Base = declarative_base()
