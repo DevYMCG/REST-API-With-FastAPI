@@ -11,15 +11,27 @@ Create A REST API with FastAPI, SQLAlchemy and PostgreSQL.
   * Windows:
   Ejecutar en terminal
    * `py -m venv env`
-  
+
 3. Iniciar el entorno virtual:
   * Windows:
    * `.\env\Scripts\activate.bat`
   * Mac/linux
    * `source env/bin/activate`
-  
+
 4. Instalar librerias:
   * `pip install -r requirements.txt`
-  
+
 5. Iniciar el servidor:
   * `uvicorn main:app --reload`
+
+
+## Conexiòn a la bd
+
+**LIbrerias usadas:**
+
+`
+pip install sql sqlalchemy
+pip install psycopg2-binary
+`
+
+crear archivo database.py con la conexiòn a la bd
