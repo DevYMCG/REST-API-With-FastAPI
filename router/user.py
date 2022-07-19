@@ -16,7 +16,9 @@ def get_db():
     finally:
         db.close()
 
-router = APIRouter(prefix="/api/v1")
+
+router = APIRouter()
+
 
 @router.post("/",
     status_code=status.HTTP_201_CREATED,
@@ -44,7 +46,7 @@ def read_users(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
 
 
 @router.get(
-    "{user_id}",
+    "/{user_id}",
     response_model=user_schema.User)
 def read_user(user_id: int, db: Session = Depends(get_db)):
     db_user = user_service.get_user(db, user_id=user_id)

@@ -1,5 +1,5 @@
 from fastapi.security import OAuth2PasswordRequestForm
-from fastapi import Depends, status, APIRouter, HTTPException
+from fastapi import Depends, APIRouter
 
 from sqlalchemy.orm import Session
 from services import auth_service
@@ -15,7 +15,7 @@ def get_db():
     finally:
         db.close()
 
-router = APIRouter(prefix="/api/v1")
+router = APIRouter()
 
 @router.post(
     "/login",

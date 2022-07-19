@@ -1,11 +1,12 @@
 import os
 
-from pydantic import BaseSettings, PostgresDsn, validator
+from pydantic import BaseSettings, EmailStr, PostgresDsn, validator
 from typing import Optional, Dict, Any
 from dotenv import load_dotenv
 load_dotenv()
 
 class settings(BaseSettings):
+    API_V1_STR: str = "/api/v1"
 
     SECRET_KEY: str = os.getenv('SECRET_KEY')
     ALGORITHM: str = os.getenv('ALGORITHM')
@@ -31,3 +32,6 @@ class settings(BaseSettings):
             path=f"/{values.get('POSTGRES_DB') or ''}",
         )
 
+    EMAIL_TEST_USER: EmailStr = os.getenv('EMAIL_TEST_USER')  # type: ignore
+    FIRST_SUPERUSER: EmailStr = os.getenv('FIRST_SUPERUSER')
+    FIRST_SUPERUSER_PASSWORD: str = os.getenv('FIRST_SUPERUSER_PASSWORD')
