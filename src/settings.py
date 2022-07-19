@@ -7,6 +7,10 @@ load_dotenv()
 
 class settings(BaseSettings):
 
+    SECRET_KEY: str = os.getenv('SECRET_KEY')
+    ALGORITHM: str = os.getenv('ALGORITHM')
+    ACCESS_TOKEN_EXPIRE_MINUTES : int = os.getenv('ACCESS_TOKEN_EXPIRE_MINUTES')
+
     POSTGRES_SERVER: str = os.getenv('DB_HOST')
     POSTGRES_USER: str = os.getenv('DB_USER')
     POSTGRES_PASSWORD: str = os.getenv('DB_PASS')
