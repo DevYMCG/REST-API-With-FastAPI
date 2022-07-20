@@ -17,7 +17,7 @@ def test_create_user_new_email(
     password = random_lower_string()
     data = {"email": username, "password": password}
     r = client.post(
-        f"/users/", headers=superuser_token_headers, json=data,
+        f"{settings.API_V1_STR}/users/", headers=superuser_token_headers, json=data,
     )
     assert 200 <= r.status_code < 300
     created_user = r.json()
@@ -34,7 +34,7 @@ def test_get_existing_user(
     user = crud.user_service.create_user(db, user=user_in)
     user_id = user.id
     r = client.get(
-        f"/users/{user_id}", headers=superuser_token_headers,
+        f"{settings.API_V1_STR}/users/{user_id}", headers=superuser_token_headers,
     )
     assert 200 <= r.status_code < 300
     api_user = r.json()

@@ -35,12 +35,12 @@ def get_password_hash(password):
     return pwd_context.hash(password)
 
 
-def get_user(db: Session, username: str):
-    return db.query(UserModel).filter((UserModel.email == username)).first()
+def get_user(db: Session, email: str):
+    return db.query(UserModel).filter((UserModel.email == email)).first()
 
 
-def authenticate_user(db: Session, username: str, password: str):
-    user = get_user(db, username = username)
+def authenticate_user(db: Session, email: str, password: str):
+    user = get_user(db, email = email)
     if not user:
         return False
     if not verify_password(password, user.hashed_password):
@@ -58,8 +58,8 @@ def create_access_token(data: dict, expires_delta: timedelta | None = None):
     return encoded_jwt
 
 
-def generate_token(db: Session, username, password):
-    user = authenticate_user(db,username, password)
+def generate_token(db: Session, email, password):
+    user = authenticate_user(db,email, password)
     if not user:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,

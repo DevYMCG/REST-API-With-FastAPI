@@ -22,5 +22,5 @@ router = APIRouter()
     response_model=Token
 )
 async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
-    access_token = auth_service.generate_token(db=db, username=form_data.username, password=form_data.password)
+    access_token = auth_service.generate_token(db=db, email=form_data.username, password=form_data.password)
     return {"access_token": access_token, "token_type": "bearer"}
